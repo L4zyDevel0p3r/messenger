@@ -26,3 +26,26 @@ body {
     background-image: var(--body-bg);
     font-family: Helvetica, sans-serif;
 }
+
+.button-link {
+    display: inline-block;
+    padding: 12px 30px;
+    font-size: 0.8925em;
+    color: #ffffff;
+    background: #19BD9B;
+    text-decoration: none;
+    text-transform: capitalize;
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -o-border-radius: 7px;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.div-link {
+    width: inherit !important;
+    margin-bottom: 15px;
+}
