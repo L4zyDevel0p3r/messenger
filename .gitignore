@@ -1,0 +1,12 @@
+**/__pycache__
+**/.idea
+**/.vscode
+
+# Ignorign database
+db.sqlite3
+
+# Ignoring static files folder
+static_cdn/
+
+# Ignoring virtual environment
+venv/
