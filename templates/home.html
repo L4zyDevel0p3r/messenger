@@ -1,0 +1,41 @@
+{% extends "shared/_MainLayout.html" %}
+{% load static %}
+
+{% block title %}Messenger{% endblock %}
+
+{% block header_ref %}
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+    <style>
+        body {
+            display: block;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container" style="padding-top: 75px">
+        <h2 class="text-center" style="margin-bottom: 25px">Choose a room</h2>
+
+        <div class="row">
+            <div class="div-link">
+                <a href="google.com" class="button-link">Google</a>
+            </div>
+            <div class="div-link">
+                <a href="youtube.com" class="button-link">YouTube</a>
+            </div>
+            <div class="div-link">
+                <a href="instagram.com" class="button-link">Instagram</a>
+            </div>
+            <div class="div-link">
+                <a href="discord.com" class="button-link">Discord</a>
+            </div>
+            <div class="div-link">
+                <a href="Reddit.com" class="button-link">Reddit</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer_ref %}
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+{% endblock %}
