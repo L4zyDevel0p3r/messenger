@@ -30,4 +30,11 @@ def validate_image_size(img):
 # Create your models here.
 
 class User(AbstractUser):
-    pass
+    picture = models.ImageField(
+        upload_to=upload_user_pic, validators=[validate_image_size], null=True, verbose_name=_("Profile picture")
+    )
+
+    class Meta:
+        verbose_name_plural = _('users')
+        verbose_name = _('user')
+        db_table = 'auth_user'
