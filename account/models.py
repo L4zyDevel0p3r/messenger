@@ -44,6 +44,16 @@ class User(AbstractUser):
 
     objects = CustomUserManager()
 
+    def save(self, *args, **kwargs):
+        try:
+            this = User.objects.get(pk=self.pk)
+            if this.picture != self.picture:
+                this.picture.delete(save=False)
+        except:
+            pass  # When new photo then we do nothing, normal case
+
+        super().save(*args, **kwargs)
+
     class Meta:
         verbose_name_plural = _('users')
         verbose_name = _('user')
