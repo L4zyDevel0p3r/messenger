@@ -1,8 +1,7 @@
 from django.utils.translation import gettext_lazy as _
-from .models import validate_image_size
+from .models import User, validate_image_size
 from django.core import validators
 from django import forms
-from .models import User
 
 
 class LoginForm(forms.Form):
