@@ -1,5 +1,5 @@
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from .forms import LoginForm
 
@@ -30,3 +30,8 @@ def login_page(request):
             login_form.add_error("password", _("Incorrect username or password."))
 
     return render(request, "auth/login.html", context)
+
+
+def logout_view(request):
+    logout(request)
+    return redirect("/")
