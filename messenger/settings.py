@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django_render_partial',
 
     'chat',
+    'account',
 ]
 
 MIDDLEWARE = [
