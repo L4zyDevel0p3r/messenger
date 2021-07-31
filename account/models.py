@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, UserManager
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from django.db import models
@@ -29,10 +29,20 @@ def validate_image_size(img):
 
 # Create your models here.
 
+class CustomUserManager(UserManager):
+    def create_user(self, username, email=None, password=None, picture=None, **extra_fields):
+        user = super().create_user(username=username, email=email, password=password, **extra_fields)
+        user.picture = picture
+        user.save()
+        return user
+
+
 class User(AbstractUser):
     picture = models.ImageField(
         upload_to=upload_user_pic, validators=[validate_image_size], null=True, verbose_name=_("Profile picture")
     )
+
+    objects = CustomUserManager()
 
     class Meta:
         verbose_name_plural = _('users')
