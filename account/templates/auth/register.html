@@ -1,0 +1,66 @@
+{% extends "shared/_MainLayout.html" %}
+{% load static %}
+
+{% block title %}Register{% endblock %}
+
+{% block header_ref %}
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container" style="padding-top: 50px">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                <div class="mb-3">
+                    {{ register_form.username.label_tag }}
+                    {{ register_form.username }}
+                    {% for error in register_form.username.errors %}
+                        <br>
+                        <div class="alert alert-warning">
+                            <p style="margin-bottom: 0">{{ error }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="mb-3">
+                    {{ register_form.password.label_tag }}
+                    {{ register_form.password }}
+                    {% for error in register_form.password.errors %}
+                        <br>
+                        <div class="alert alert-warning">
+                            <p style="margin-bottom: 0">{{ error }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="mb-3">
+                    {{ register_form.password2.label_tag }}
+                    {{ register_form.password2 }}
+                    {% for error in register_form.password2.errors %}
+                        <br>
+                        <div class="alert alert-warning">
+                            <p style="margin-bottom: 0">{{ error }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="mb-3">
+                    {{ register_form.picture.label_tag }}
+                    <br>
+                    {{ register_form.picture }}
+                    {% for error in register_form.picture.errors %}
+                        <br>
+                        <div class="alert alert-warning">
+                            <p style="margin-bottom: 0">{{ error }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                <button type="submit" class="btn btn-success">Register</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block footer_ref %}
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+{% endblock %}
