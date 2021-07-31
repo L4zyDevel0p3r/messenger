@@ -8,3 +8,11 @@ def home_page(request):
     }
 
     return render(request, "home.html", context)
+
+
+def header(request, *args, **kwargs):
+    context = {
+        "reqpath": kwargs.get("reqpath")
+    }
+
+    return render(request, "shared/header.html", context)
