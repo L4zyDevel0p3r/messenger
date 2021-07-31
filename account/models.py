@@ -1,8 +1,12 @@
 from django.contrib.auth.models import AbstractUser, UserManager
-from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
+from django.core.exceptions import ValidationError
+from django.db.models.signals import pre_delete
+from messenger.settings import MEDIA_ROOT
+from django.dispatch import receiver
 from django.db import models
 from uuid import uuid4
+import shutil
 import os
 
 
@@ -58,3 +62,8 @@ class User(AbstractUser):
         verbose_name_plural = _('users')
         verbose_name = _('user')
         db_table = 'auth_user'
+
+
+@receiver(sender=User, signal=pre_delete)
+def user_pre_delete_receiver(sender, instance, *args, **kwargs):
+    shutil.rmtree(f"{MEDIA_ROOT}/profile_pictures/{instance.username}")
