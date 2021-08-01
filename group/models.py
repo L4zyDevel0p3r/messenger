@@ -9,6 +9,10 @@ from django.db import models
 
 
 class GroupManager(models.Manager):
+    def filter_by_active(self):
+        qs = self.get_queryset().filter(active=True)
+        return qs
+
     def get_by_name(self, name):
         qs = self.get_queryset().filter(name__iexact=name)
 
