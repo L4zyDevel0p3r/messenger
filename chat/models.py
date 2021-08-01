@@ -18,4 +18,4 @@ class Message(models.Model):
         verbose_name = _("message")
 
     def __str__(self):
-        return self.author
+        return self.author.username
