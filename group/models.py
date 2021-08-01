@@ -1,4 +1,7 @@
 from django.utils.translation import gettext_lazy as _
+from django.db.models.signals import pre_save
+from django.db.utils import IntegrityError
+from django.dispatch import receiver
 from django.db import models
 
 
@@ -36,3 +39,14 @@ class Group(models.Model):
 
     def __str__(self):
         return self.name
+
+
+@receiver(sender=Group, signal=pre_save)
+def group_pre_save_receiver(sender, instance, *args, **kwargs):
+    qs1 = sender.objects.get_by_name(instance.name)
+    if qs1 is not None and qs1 != instance:
+        raise IntegrityError(_("A group with that name already exists."))
+
+    qs2 = sender.objects.get_by_url_name(instance.url_name)
+    if qs2 is not None and qs2 != instance:
+        raise IntegrityError(_("A group with that url name already exists."))
