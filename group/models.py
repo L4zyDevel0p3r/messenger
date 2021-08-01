@@ -14,6 +14,14 @@ class GroupManager(models.Manager):
         else:
             return None
 
+    def get_by_url_name(self, url_name):
+        qs = self.get_queryset().filter(url_name__iexact=url_name)
+
+        if qs.exists():
+            return qs.first()
+        else:
+            return None
+
 
 class Group(models.Model):
     name = models.CharField(max_length=20, unique=True, verbose_name=_("name"))
