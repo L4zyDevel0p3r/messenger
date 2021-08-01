@@ -6,7 +6,13 @@ from django.db import models
 
 
 class GroupManager(models.Manager):
-    pass
+    def get_by_name(self, name):
+        qs = self.get_queryset().filter(name__iexact=name)
+
+        if qs.exists():
+            return qs.first()
+        else:
+            return None
 
 
 class Group(models.Model):
