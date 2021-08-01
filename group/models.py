@@ -30,6 +30,7 @@ class Group(models.Model):
     name = models.CharField(max_length=20, unique=True, verbose_name=_("name"))
     url_name = models.CharField(max_length=20, unique=True, verbose_name=_("url name"))
     date = models.DateTimeField(auto_now_add=True, verbose_name=_("date"))
+    active = models.BooleanField(default=False, verbose_name=_("active"))
 
     objects = GroupManager()
 
