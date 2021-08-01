@@ -1,4 +1,5 @@
 from django.contrib import admin
+from .forms import GroupForm
 from .models import Group
 
 
@@ -7,6 +8,7 @@ from .models import Group
 
 @admin.register(Group)
 class GroupAdmin(admin.ModelAdmin):
+    form = GroupForm
     list_display = ("__str__", "date")
 
     class Meta:
