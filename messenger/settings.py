@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     'chat',
     'account',
+    'group',
 ]
 
 MIDDLEWARE = [
