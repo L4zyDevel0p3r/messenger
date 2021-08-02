@@ -1,5 +1,6 @@
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
+from django.utils.html import conditional_escape
 from group.models import Group
 from .models import Message
 import json
@@ -63,7 +64,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             self.room_group_name,
             {
                 "type": "send_message",
-                "message": message,
+                "message": conditional_escape(message),
                 "author": await self.get_msg_author_username(msg),
                 "author_pic": msg.author.picture.url
             }
