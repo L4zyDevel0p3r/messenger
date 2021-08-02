@@ -34,7 +34,9 @@
         </header>
 
         <main class="msger-chat">
-
+            {% for message in messages %}
+                {% include "components/message_item.html" with message=message %}
+            {% endfor %}
         </main>
 
         <form class="msger-inputarea">
