@@ -14,7 +14,7 @@
         <div class="row">
             {% for group in groups %}
                 <div class="div-link">
-                    <a href="#" class="button-link">{{ group.name }}</a>
+                    <a href="{{ group.get_absolute_url }}" class="button-link">{{ group.name }}</a>
                 </div>
             {% endfor %}
         </div>
