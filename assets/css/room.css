@@ -67,6 +67,10 @@ body {
     background: var(--left-msg-bg);
 }
 
+.msg-bubble .msg-text {
+    overflow-wrap: break-word;
+}
+
 .msg-info {
     display: flex;
     justify-content: space-between;
