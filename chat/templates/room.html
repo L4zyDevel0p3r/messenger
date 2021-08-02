@@ -52,6 +52,9 @@
         const msgerForm = get(".msger-inputarea");
         const msgerInput = get(".msger-input");
         const msgerChat = get(".msger-chat");
+
+        msgerChat.scrollTo(0, msgerChat.scrollHeight)
+
         const ChatSocket = new ReconnectingWebSocket("ws://" + window.location.host + "/ws/chat/" + "{{ room_name }}" + "/");
 
         ChatSocket.onmessage = function (e) {
