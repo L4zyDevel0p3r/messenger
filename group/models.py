@@ -2,6 +2,7 @@ from django.utils.translation import gettext_lazy as _
 from django.db.models.signals import pre_save
 from django.db.utils import IntegrityError
 from django.dispatch import receiver
+from django.urls import reverse
 from django.db import models
 
 
@@ -37,6 +38,9 @@ class Group(models.Model):
     active = models.BooleanField(default=False, verbose_name=_("active"))
 
     objects = GroupManager()
+
+    def get_absolute_url(self):
+        return reverse("ChatApp:RoomPage", kwargs={"room_name": self.url_name})
 
     class Meta:
         verbose_name_plural = _("groups")
