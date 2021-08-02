@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import Http404
+from chat.models import Message
 from group.models import Group
 
 
@@ -14,8 +15,11 @@ def room_page(request, *args, **kwargs):
     if not qs.exists():
         raise Http404(f"{room_name} not found!")
 
+    messages = Message.objects.filter(group_id=qs.first().id)
+
     context = {
-        "room_name": room_name
+        "room_name": room_name,
+        "messages": messages
     }
 
     return render(request, "room.html", context)
