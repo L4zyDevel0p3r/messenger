@@ -22,7 +22,8 @@ class RegisterForm(forms.Form):
         label=_("username"),
         validators=[
             validators.MinLengthValidator(8, _("username cannot be less than 8 characters.")),
-            validators.MaxLengthValidator(20, _("username cannot be more than 20 characters."))
+            validators.MaxLengthValidator(20, _("username cannot be more than 20 characters.")),
+            validators.RegexValidator(r'^[0-9a-zA-Z_]*$', _("Only alphanumeric characters and _ are allowed."))
         ]
     )
 
