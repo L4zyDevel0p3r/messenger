@@ -18,7 +18,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
     @database_sync_to_async
     def db_create_message(self, message):
         group = Group.objects.get_by_url_name(self.room_name)
-        return Message.objects.create(author_id=self.user.id, group_id=group.id, text=message)
+        encrypted_message = Message.encrypt_text(message)
+        return Message.objects.create(author_id=self.user.id, group_id=group.id, text=encrypted_message)
 
     @database_sync_to_async
     def get_msg_author_username(self, msg):
