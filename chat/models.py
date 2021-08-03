@@ -3,6 +3,8 @@ from account.models import User
 from group.models import Group
 from django.db import models
 
+ENCRYPTION_KEY = b'f5cQj1_Pv68Qe-iNh1oml03pRZR4LIJllS8qFpJtTzg='
+
 
 # Create your models here.
 
