@@ -81,12 +81,13 @@
         });
 
         function appendMessage(name, img, side, text) {
+            let is_bot = name.toLowerCase() === "{{ room_name }}".toLowerCase()
             //   Simple solution for small apps
             const msgHTML = `
                 <div class="msg ${side}-msg">
                   <div class="msg-img" style="background-image: url(${img})"></div>
 
-                  <div class="msg-bubble">
+                  <div class="msg-bubble" ${is_bot ? "style='background-color: #28a745'" : null}>
                     <div class="msg-info">
                       <div class="msg-info-name">${name}</div>
                       <div class="msg-info-time">${formatDate(new Date())}</div>
