@@ -81,7 +81,7 @@
         });
 
         function appendMessage(name, img, side, text) {
-            let is_bot = name.toLowerCase() === "{{ room_name }}".toLowerCase()
+            let is_bot = name === "SERVER"
             //   Simple solution for small apps
             const msgHTML = `
                 <div class="msg ${side}-msg">

@@ -50,7 +50,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                     {
                         "type": "send_message",
                         "message": f"'{username}' joined the room.",
-                        "author": self.room_name.upper(),
+                        "author": "SERVER",
                         "author_pic": STATIC_URL + "img/Bot.png"
                     }
                 )
