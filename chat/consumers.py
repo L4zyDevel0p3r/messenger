@@ -64,6 +64,17 @@ class ChatConsumer(AsyncWebsocketConsumer):
             await self.close()
 
     async def disconnect(self, code):
+        username = self.user.username
+        await self.channel_layer.group_send(
+            self.room_group_name,
+            {
+                "type": "send_message",
+                "message": f"'{username}' left the room.",
+                "author": "SERVER",
+                "author_pic": STATIC_URL + "img/Bot.png"
+            }
+        )
+
         for group in self.groups:
             await self.channel_layer.group_discard(group, self.channel_name)
 
