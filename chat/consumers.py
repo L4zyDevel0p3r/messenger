@@ -1,6 +1,7 @@
 from channels.generic.websocket import AsyncWebsocketConsumer
-from channels.db import database_sync_to_async
 from django.utils.html import conditional_escape
+from channels.db import database_sync_to_async
+from messenger.settings import STATIC_URL
 from group.models import Group
 from .models import Message
 import json
@@ -42,6 +43,17 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
                 await self.channel_layer.group_add(self.room_group_name, self.channel_name)
                 await self.accept()
+
+                username = self.user.username
+                await self.channel_layer.group_send(
+                    self.room_group_name,
+                    {
+                        "type": "send_message",
+                        "message": f"'{username}' joined.",
+                        "author": self.room_name.upper(),
+                        "author_pic": STATIC_URL + "img/Bot.png"
+                    }
+                )
 
             # There is no group named room_name in the database
             else:
