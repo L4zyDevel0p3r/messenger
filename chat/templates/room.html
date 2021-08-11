@@ -60,7 +60,7 @@
         ChatSocket.onmessage = function (e) {
             const data = JSON.parse(e.data);
             const side = data.author === "{{ request.user.username }}" ? "right" : "left";
-            appendMessage(data.author, data.author_pic, side, data.message);
+            appendMessage(data.author, data.author_pic, side, data.message, data.status);
         }
 
         ChatSocket.onclose = function (e) {
@@ -80,14 +80,21 @@
             msgerInput.value = "";
         });
 
-        function appendMessage(name, img, side, text) {
+        function appendMessage(name, img, side, text, status) {
             let is_bot = name === "SERVER"
+            let bot_bg_color = ""
+            if (status === "joined") {
+                bot_bg_color = "#28a745"
+            }
+            else if (status === "left") {
+                bot_bg_color = "#dc3545"
+            }
             //   Simple solution for small apps
             const msgHTML = `
                 <div class="msg ${side}-msg">
                   <div class="msg-img" style="background-image: url(${img})"></div>
 
-                  <div class="msg-bubble" ${is_bot ? "style='background-color: #28a745'" : null}>
+                  <div class="msg-bubble" ${is_bot ? `style='background-color: ${bot_bg_color}'` : null}>
                     <div class="msg-info">
                       <div class="msg-info-name">${name}</div>
                       <div class="msg-info-time">${formatDate(new Date())}</div>
