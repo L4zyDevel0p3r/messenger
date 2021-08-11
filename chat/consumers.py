@@ -51,7 +51,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
                         "type": "send_message",
                         "message": f"'{username}' joined the room.",
                         "author": "SERVER",
-                        "author_pic": STATIC_URL + "img/Bot.png"
+                        "author_pic": STATIC_URL + "img/Bot.png",
+                        "status": "joined"
                     }
                 )
 
@@ -71,7 +72,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 "type": "send_message",
                 "message": f"'{username}' left the room.",
                 "author": "SERVER",
-                "author_pic": STATIC_URL + "img/Bot.png"
+                "author_pic": STATIC_URL + "img/Bot.png",
+                "status": "left"
             }
         )
 
@@ -98,9 +100,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
         message = event.get("message")
         author = event.get("author")
         author_pic = event.get("author_pic")
+        status = event.get("status")  # Joined or Left
 
         await self.send(text_data=json.dumps({
             "message": message,
             "author": author,
-            "author_pic": author_pic
+            "author_pic": author_pic,
+            "status": status
         }))
