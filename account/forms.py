@@ -1,4 +1,5 @@
 from django.utils.translation import gettext_lazy as _
+from django.contrib.auth import password_validation
 from .models import User, validate_image_size
 from django.core import validators
 from django import forms
@@ -29,11 +30,7 @@ class RegisterForm(forms.Form):
 
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={"class": "form-control", "placeholder": _("password")}),
-        label=_("password"),
-        validators=[
-            validators.MinLengthValidator(8,
-                                          _("short passwords are easy to guess. Try one with at least 8 characters."))
-        ]
+        label=_("password")
     )
 
     password2 = forms.CharField(
@@ -64,5 +61,7 @@ class RegisterForm(forms.Form):
 
         if pwd != pwd2:
             raise forms.ValidationError(_("passwords do not match."))
+
+        password_validation.validate_password(pwd2)
 
         return pwd
